@@ -21,6 +21,7 @@
     "@babel/polyfill": "^7.4.4",
     "@babel/register": "^7.4.4",
     "config": "^3.1.0",
+    "convict": "^5.0.0",
     "express": "^4.16.4",
     "sequelize": "^5.8.6"
   }
