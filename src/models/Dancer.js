@@ -18,5 +18,10 @@ module.exports = function (sequelize, DataTypes) {
         parent: {
             type: String
         }
+    }, {
+        tableName: 'dancers',
+        freezeTableName: true,
+        paranoid: true,
+        underscored: true
     });
 };
