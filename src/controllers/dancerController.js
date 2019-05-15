@@ -49,7 +49,7 @@ const getDancer = function (id) {
 
 const getDancers = function () {
     return new Promise((resolve, reject) => {
-        Dancers.findAll()
+        Dancer.findAll()
             .then((dancers) => {
                 resolve(dancers);
             })
@@ -59,9 +59,34 @@ const getDancers = function () {
     });
 };
 
+const addToGroup = function (dancer_id, group_id) {
+    return new Promise((resolve, reject) => {
+        Dancer.update({ id: dancer_id }, { group_id: group_id })
+            .then((dancer) => {
+                resolve(dancer);
+            })
+            .catch((err) => {
+                reject(err);
+            });
+    });
+};
+
+const deleteDancer = function (id) {
+    return new Promise((resolve, reject) => {
+        Dancer.destroy({
+            where: {
+                id: id
+            }
+        }).then(() => resolve(null))
+          .catch((err) => reject(err));
+    });
+};
+
 export {
     createDancer,
     updateDancer,
     getDancer,
-    getDancers
+    getDancers,
+    addToGroup,
+    deleteDancer
 }
