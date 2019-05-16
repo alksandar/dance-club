@@ -39,8 +39,20 @@ const getPayments = function () {
     });
 };
 
+const deletePayment = function (id) {
+    return new Promise((resolve, reject) => {
+        Payment.delete({
+            where: {
+                id: id
+            }
+        }).then(() => resolve(null))
+            .catch((err) => reject(err));
+    });
+};
+
 export {
     makePayment,
     getDancersPayments,
-    getPayments
+    getPayments,
+    deletePayment
 }
