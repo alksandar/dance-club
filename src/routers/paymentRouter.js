@@ -25,10 +25,10 @@ paymentRouter.get('/:id', (req, res) => {
         });
 });
 
-paymentRouter.post('/addpayment', (req, res) => {
+paymentRouter.post('/add', (req, res) => {
     makePayment(req.body.dancer_id, req.body.amount, req.body.date, req.body.note)
         .then((payment) => {
-            res.status(202).json({payment});
+            res.status(201).json({payment});
         })
         .catch((err) => {
             res.status(500).json({errors: ['Something went wrong.']});
