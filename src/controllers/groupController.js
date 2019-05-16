@@ -58,9 +58,18 @@ const deleteGroup = function (id) {
     });
 };
 
+const getGroups = function () {
+    return new Promise((resolve, reject) => {
+        Group.findAll().then((groups) => {
+            resolve(groups);
+        }).catch((err) => reject(err));
+    });
+};
+
 export {
     createGroup,
     deleteGroup,
     updateGroup,
-    getGroupDancers
+    getGroupDancers,
+    getGroups
 }
