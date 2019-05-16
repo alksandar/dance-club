@@ -59,3 +59,5 @@ dancerRouter.delete('/delete/:id', (req, res) => {
             res.status(500).json({errors: ['Something went wrong.']});
         });
 });
+
+export default dancerRouter;
