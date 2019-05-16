@@ -4,7 +4,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon -e js -x babel-node ./src/bin/www.js"
   },
   "repository": {
     "type": "git",
@@ -17,12 +18,24 @@
   },
   "homepage": "https://github.com/alksandar/dance-club#readme",
   "dependencies": {
+    "@babel/cli": "^7.4.4",
     "@babel/core": "^7.4.4",
+    "@babel/node": "^7.2.2",
+    "@babel/plugin-proposal-object-rest-spread": "^7.4.4",
+    "@babel/plugin-transform-runtime": "^7.4.4",
     "@babel/polyfill": "^7.4.4",
+    "@babel/preset-env": "^7.4.4",
+    "@babel/preset-flow": "^7.0.0",
     "@babel/register": "^7.4.4",
+    "@babel/runtime": "^7.4.4",
     "config": "^3.1.0",
     "convict": "^5.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.0.0",
     "express": "^4.16.4",
-    "sequelize": "^5.8.6"
+    "nodemon": "^1.19.0",
+    "pg": "^7.11.0",
+    "sequelize": "^5.8.6",
+    "winston": "^3.2.1"
   }
 }
