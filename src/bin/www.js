@@ -8,7 +8,7 @@ require('@babel/register')
 
 const app = require('./../app');
 const http = require('http');
-const DatabaseConnection = require('./../database/connection');
+const DatabaseConnection = require('./../models/databaseConnection');
 const config = require('./../utils/config');
 const logger = require('./../utils/logger');
 const moment = require('moment');
