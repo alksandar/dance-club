@@ -1,6 +1,9 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
+import dancerRouter from "./routers/dancerRouter";
+import groupRouter from "./routers/groupRouter";
+import paymentRouter from "./routers/paymentRouter";
 
 const tables = require('../src/models/tables');
 
@@ -20,6 +23,9 @@ app.use(cors({credentials: true, origin: true}));
 /**
  * Register routers
  */
+app.use('/dancer', dancerRouter);
+app.use('/group', groupRouter);
+app.use('/payment', paymentRouter);
 
 
 // catch 404 and forward to error handler
