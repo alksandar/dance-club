@@ -1,5 +1,7 @@
 const convict = require('convict');
 
+require('dotenv').config();
+
 const config = convict({
     env: {
         doc: 'The server environment.',
@@ -29,3 +31,5 @@ const config = convict({
         }
     },
 });
+
+module.exports = config;
