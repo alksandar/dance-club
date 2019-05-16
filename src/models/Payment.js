@@ -13,7 +13,7 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.DATE,
         },
         note: {
-            type: DataTypes.String,
+            type: DataTypes.STRING,
         }
     }, {
         tableName: 'payments',
