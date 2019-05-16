@@ -13,14 +13,14 @@ groupRouter.get('/', (req, res) => {
 });
 
 groupRouter.get('/:id/dancers', (req, res) => {
-    if (!req.query.id) {
+    if (!req.params.id) {
         res.status(400).json({errors: ['Id of group must be provided to get dancers.']});
     }
 
-    getGroupDancers(req.query.id)
+    getGroupDancers(req.params.id)
         .then((group) => {
             if (!group) {
-                res.status(404).json({errors: [`Group with id: ${req.query.id} could not be found.`]});
+                res.status(404).json({errors: [`Group with id: ${req.params.id} could not be found.`]});
             }
             res.status(200).json({group});
         })
@@ -40,11 +40,11 @@ groupRouter.post('/create', (req, res) => {
 });
 
 groupRouter.delete('/delete/:id', (req, res) => {
-    if (!req.query.id) {
+    if (!req.params.id) {
         res.status(400).json({errors: 'Group id must be provided in order to delete group.'});
     }
 
-    deleteGroup(req.query.id)
+    deleteGroup(req.params.id)
         .then(() => {
             res.status(202);
         })
@@ -53,18 +53,18 @@ groupRouter.delete('/delete/:id', (req, res) => {
         });
 });
 
-groupRouter.post(':group_id/add/:dancer_id', (req, res) => {
-    if (!req.query.dancer_id) {
+groupRouter.post('/:group_id/add/:dancer_id', (req, res) => {
+    if (!req.params.dancer_id) {
         res.status(400).json({errors: 'Dancer id must be provided in order to add to group.'});
     }
 
-    if (!req.query.group_id) {
+    if (!req.params.group_id) {
         res.status(400).json({errors: 'Group id must be provided in order to add to group.'});
     }
 
-    addToGroup(req.query.dancer.id, req.query.group_id)
+    addToGroup(req.params.dancer_id, req.params.group_id)
         .then(() => {
-            res.status(202);
+            res.status(202).json();
         })
         .catch((err) => {
             res.status(500).json({errors: ['Something went wrong.']});

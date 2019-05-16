@@ -1,4 +1,4 @@
-const config = require('../utils/config');
+const config = require('./../utils/config');
 const Sequelize = require('sequelize');
 
 /**
@@ -29,7 +29,7 @@ class DatabaseConnection {
                 define: {
                     timestamps: true,
                 },
-                logging: false
+                logging: console.log
             });
 
             DatabaseConnection.instance = this;

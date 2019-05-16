@@ -61,11 +61,14 @@ const getDancers = function () {
 
 const addToGroup = function (dancer_id, group_id) {
     return new Promise((resolve, reject) => {
-        Dancer.update({ id: dancer_id }, { group_id: group_id })
+        Dancer.update({ group_id: group_id }, { where: {
+                id: dancer_id}
+            })
             .then((dancer) => {
                 resolve(dancer);
             })
             .catch((err) => {
+                console.log('ERROR IS: ', err);
                 reject(err);
             });
     });

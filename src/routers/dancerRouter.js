@@ -12,9 +12,9 @@ dancerRouter.get('/', (req, res) => {
 });
 
 dancerRouter.get('/:id', (req, res) => {
-    getDancer(req.query.id).then((dancer) => {
+    getDancer(req.params.id).then((dancer) => {
         if (!dancer) {
-            res.status(404).json({ errors: [`Dancer with id: ${req.query.id} could not be found.`] });
+            res.status(404).json({ errors: [`Dancer with id: ${req.params.id} could not be found.`] });
         }
         res.status(200).json({ dancer });
     }).catch((err) => {
@@ -22,7 +22,7 @@ dancerRouter.get('/:id', (req, res) => {
     });
 });
 
-dancerRouter.post('/add', (req, res) => {
+dancerRouter.post('/create', (req, res) => {
     createDancer(req.body.first_name, req.body.last_name, req.body.phone_number, req.body.parent)
         .then((dancer) => {
             res.status(201).json({dancer});
@@ -32,7 +32,7 @@ dancerRouter.post('/add', (req, res) => {
         });
 });
 
-dancerRouter.put('/edit/:id', (req, res) => {
+dancerRouter.put('/edit', (req, res) => {
     if (!req.query.id) {
         res.status(400).json({ errors: ['Dancer id must be provided in order to edit.']});
     }

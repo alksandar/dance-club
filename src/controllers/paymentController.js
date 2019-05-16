@@ -2,8 +2,9 @@ import { Payment } from './../models/tables';
 
 const makePayment = function (dancer_id, amount, date, note) {
     return new Promise((resolve, reject) => {
+        console.log('DANCER ID IS', dancer_id)
         Payment.create({
-            dancer_id,
+            DancerId: dancer_id,
             amount,
             date,
             note,
@@ -41,7 +42,7 @@ const getPayments = function () {
 
 const deletePayment = function (id) {
     return new Promise((resolve, reject) => {
-        Payment.delete({
+        Payment.destroy({
             where: {
                 id: id
             }

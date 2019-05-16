@@ -11,7 +11,7 @@ paymentRouter.get('/', (req, res) => {
     });
 });
 
-paymentRouter.get('/:id', (req, res) => {
+paymentRouter.get('/dancer', (req, res) => {
     getDancersPayments(req.query.id)
         .then((payment) => {
             if (!payment) {
@@ -25,7 +25,7 @@ paymentRouter.get('/:id', (req, res) => {
         });
 });
 
-paymentRouter.post('/add', (req, res) => {
+paymentRouter.post('/create', (req, res) => {
     makePayment(req.body.dancer_id, req.body.amount, req.body.date, req.body.note)
         .then((payment) => {
             res.status(201).json({payment});
@@ -35,14 +35,15 @@ paymentRouter.post('/add', (req, res) => {
         });
 });
 
-paymentRouter.delete('/:id', (req, res) => {
+paymentRouter.delete('/delete', (req, res) => {
     if (!req.query.id) {
         res.status(400).json({errors: ['Payment id must be provided in order to delete.']});
     }
 
     deletePayment(req.query.id).then(() => {
-        res.status(202);
+        res.status(202).json();
     }).catch((err) => {
+        console.log('ERROR IS: ', err);
         res.status(500).json({errors: ['Something went wrong.']});
     });
 });
