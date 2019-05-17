@@ -32,12 +32,12 @@ dancerRouter.post('/create', (req, res) => {
         });
 });
 
-dancerRouter.put('/edit', (req, res) => {
-    if (!req.query.id) {
+dancerRouter.put('/edit/:id', (req, res) => {
+    if (!req.params.id) {
         res.status(400).json({ errors: ['Dancer id must be provided in order to edit.']});
     }
 
-    updateDancer(req.query.id, req.body.first_name, req.body.last_name, req.body.phone_number, req.body.parent)
+    updateDancer(req.params.id, req.body.first_name, req.body.last_name, req.body.phone_number, req.body.parent)
         .then((dancer) => {
             res.status(200).json({dancer});
         })
@@ -47,11 +47,11 @@ dancerRouter.put('/edit', (req, res) => {
 });
 
 dancerRouter.delete('/delete/:id', (req, res) => {
-    if (!req.query.id) {
+    if (!req.params.id) {
         res.status(400).json({errors: ['Dancer id must be provided in order to delete.']});
     }
 
-    deleteDancer(req.query.id)
+    deleteDancer(req.params.id)
         .then(() => {
             res.status(202);
         })
