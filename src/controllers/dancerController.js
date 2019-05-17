@@ -73,6 +73,20 @@ const addToGroup = function (dancer_id, group_id) {
     });
 };
 
+const removeFromGroup = function (dancer_id) {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let dancer = await Dancer.findOne({where: { id: dancer_id }});
+            await dancer.set({GroupId: null});
+            await dancer.save();
+            resolve(dancer);
+        } catch (err) {
+            console.log('ERROR IS: ', err);
+            reject(err);
+        }
+    });
+};
+
 const deleteDancer = function (id) {
     return new Promise((resolve, reject) => {
         Dancer.destroy({
