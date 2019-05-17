@@ -104,5 +104,6 @@ export {
     getDancer,
     getDancers,
     addToGroup,
-    deleteDancer
+    deleteDancer,
+    removeFromGroup
 }
