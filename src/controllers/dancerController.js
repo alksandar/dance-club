@@ -60,17 +60,16 @@ const getDancers = function () {
 };
 
 const addToGroup = function (dancer_id, group_id) {
-    return new Promise((resolve, reject) => {
-        Dancer.update({ group_id: group_id }, { where: {
-                id: dancer_id}
-            })
-            .then((dancer) => {
-                resolve(dancer);
-            })
-            .catch((err) => {
-                console.log('ERROR IS: ', err);
-                reject(err);
-            });
+    return new Promise(async (resolve, reject) => {
+        try {
+            let dancer = await Dancer.findOne({where: { id: dancer_id }});
+            await dancer.set({GroupId: group_id});
+            await dancer.save();
+            resolve(dancer);
+        } catch (err) {
+            console.log('ERROR IS: ', err);
+            reject(err);
+        }
     });
 };
 
