@@ -1,6 +1,6 @@
 import {Router} from 'express';
 import {createGroup, deleteGroup, getGroupDancers, getGroups} from "../controllers/groupController";
-import {addToGroup} from "../controllers/dancerController";
+import {addToGroup, removeFromGroup} from "../controllers/dancerController";
 
 const groupRouter = new Router({strict: true});
 
@@ -63,6 +63,20 @@ groupRouter.post('/:group_id/add/:dancer_id', (req, res) => {
     }
 
     addToGroup(req.params.dancer_id, req.params.group_id)
+        .then(() => {
+            res.status(202).json();
+        })
+        .catch((err) => {
+            res.status(500).json({errors: ['Something went wrong.']});
+        });
+});
+
+groupRouter.delete('/remove/dancer/:id', (req, res) => {
+    if (!req.params.id) {
+        res.status(400).json({errors: 'Dancer id must be provided in order to add to group'});
+    }
+
+    removeFromGroup(req.params.id)
         .then(() => {
             res.status(202).json();
         })
