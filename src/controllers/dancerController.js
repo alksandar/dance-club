@@ -16,28 +16,28 @@ const createDancer = function (first_name, last_name, phone_number, parent) {
 };
 
 const updateDancer = function (id, first_name, last_name, phone_number, parent) {
-    return new Promise((resolve, reject) => {
-        let toUpdate = {};
-        if (first_name) toUpdate.first_name = first_name;
-        if (last_name) toUpdate.last_name = last_name;
-        if (phone_number) toUpdate.phone_number = phone_number;
-        if (parent) toUpdate.parent = parent;
+    return new Promise(async (resolve, reject) => {
+        try {
+            let toUpdate = {};
+            if (first_name) toUpdate.first_name = first_name;
+            if (last_name) toUpdate.last_name = last_name;
+            if (phone_number) toUpdate.phone_number = phone_number;
+            if (parent) toUpdate.parent = parent;
 
-        Dancer.update(toUpdate, {
-            where: {
-                id: id
-            }
-        }).then((dancer) => {
+            let dancer = await Dancer.findByPk(id);
+            await dancer.set(toUpdate);
+            await dancer.save();
             resolve(dancer);
-        }).catch((err) => {
+        } catch (err) {
+            console.log('ERROR IS: ', err);
             reject(err);
-        });
+        }
     });
 };
 
 const getDancer = function (id) {
     return new Promise((resolve, reject) => {
-        Dancer.findById(id)
+        Dancer.findByPk(id)
             .then((dancer) => {
                 resolve(dancer);
             })

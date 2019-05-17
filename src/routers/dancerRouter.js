@@ -53,7 +53,7 @@ dancerRouter.delete('/delete/:id', (req, res) => {
 
     deleteDancer(req.params.id)
         .then(() => {
-            res.status(202);
+            res.status(202).json();
         })
         .catch((err) => {
             res.status(500).json({errors: ['Something went wrong.']});

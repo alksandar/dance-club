@@ -29,16 +29,20 @@ const updateGroup = function (id, name) {
 
 const getGroupDancers = function (id) {
     return new Promise((resolve, reject) => {
-        Group.findById(id, {
-            include: [
-                {
-                    model: Dancer,
-                    as: 'dancers'
-                }
-            ]
+        console.log('Fetching group dancers....')
+        Group.findByPk(id, {
+                include: [
+                    {
+                        model: Dancer,
+                        as: 'dancers'
+                    }
+                ]
         }).then((group) => {
+            console.log('Resolved')
             resolve(group);
         }).catch((err) => {
+            console.log('not resolved')
+            console.log('ERROR IS: ', err);
             reject(err);
         });
     });
