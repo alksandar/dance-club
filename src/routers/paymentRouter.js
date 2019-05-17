@@ -11,11 +11,11 @@ paymentRouter.get('/', (req, res) => {
     });
 });
 
-paymentRouter.get('/dancer', (req, res) => {
-    getDancersPayments(req.query.id)
+paymentRouter.get('/dancer/:id', (req, res) => {
+    getDancersPayments(req.params.id)
         .then((payment) => {
             if (!payment) {
-                res.status(404).json({errors: [`No payment for dancer with id: ${req.query.id} found`]});
+                res.status(404).json({errors: [`No payment for dancer with id: ${req.params.id} found`]});
             }
 
             res.status(200).json({payment});
@@ -35,12 +35,12 @@ paymentRouter.post('/create', (req, res) => {
         });
 });
 
-paymentRouter.delete('/delete', (req, res) => {
-    if (!req.query.id) {
+paymentRouter.delete('/delete/:id', (req, res) => {
+    if (!req.params.id) {
         res.status(400).json({errors: ['Payment id must be provided in order to delete.']});
     }
 
-    deletePayment(req.query.id).then(() => {
+    deletePayment(req.params.id).then(() => {
         res.status(202).json();
     }).catch((err) => {
         console.log('ERROR IS: ', err);
