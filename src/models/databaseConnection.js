@@ -19,6 +19,7 @@ class DatabaseConnection {
              * Database ORM for accessing models and the database by Sequelize
              * @type {Sequelize}
              */
+            console.log('DATABASE URL IS: ', config.get('db.url'));
 
             this.db = new Sequelize(config.get('db.url'), {
                 dialect: 'postgres',
