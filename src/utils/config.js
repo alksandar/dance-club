@@ -27,7 +27,7 @@ const config = convict({
             doc: 'Database uri',
             format: String,
             default: null,
-            env: 'DB_URL'
+            env: 'DATABASE_URL'
         }
     },
 });
